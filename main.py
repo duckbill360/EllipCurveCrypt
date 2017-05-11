@@ -4,6 +4,7 @@
 
 # IMPORTS
 import ECC
+import point
 
 
 def delete_space(string):
@@ -21,9 +22,12 @@ def add_space(string):
 
 
 if __name__ == '__main__':
-    M_str = "E1DB763C 99248E66 0A4801A9 A973A1A3 6B5E93"
+    print('<EC-ElGamal encryption>')
+    M_str = "2923BE84 E16CD6AE 529049F1 F1BBE9EB B3A6DB"
     M = int(delete_space(M_str), 16)
     print('Plaintext M =', add_space(format(M, 'x')))
     Mx, My = ECC.data_embedding(M)
-    print('Mx =', add_space(format(Mx, 'x')))
-    print('My =', add_space(format(My, 'x')))
+    P = point.Point(Mx, My)
+    P.show()
+    G = point.Point(ECC.Gx, ECC.Gy)
+    G = G.scalar_mul(ECC.n)

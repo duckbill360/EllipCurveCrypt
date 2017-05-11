@@ -30,7 +30,10 @@ def data_embedding(M):
     value = (Mx ** 3 + a * Mx + b) % p
     My = sqrt_p_3_mod_4(value, p)
 
-    return Mx, My
+    if My % 2 == 1:
+        return Mx, My
+    else:
+        return Mx, p - My
 
 
 def is_Mx_on_curve(Mx):

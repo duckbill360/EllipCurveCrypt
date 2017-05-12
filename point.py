@@ -36,9 +36,11 @@ class Point:
         str = bin(b)[2:]
 
         for i in str:
-            D = D.doubling()
-            if int(i) == 1:
-                D = D.add(self)
+            if D.x != 0:
+                D = D.doubling()
+            else:
+                if int(i) == 1:
+                    D = D.add(self)
         return D
 
     def show(self):

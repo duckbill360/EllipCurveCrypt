@@ -30,7 +30,7 @@ if __name__ == '__main__':
     print('Mx =', add_space(format(Mx, 'x')))
     print('My =', add_space(format(My, 'x')))
     P = point.Point(Mx, My)
-    
+
     G = point.Point(ECC.Gx, ECC.Gy)
     A = point.Point(ECC.a, ECC.b)
     G = G.add(A)

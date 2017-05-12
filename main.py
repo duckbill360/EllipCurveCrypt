@@ -27,7 +27,11 @@ if __name__ == '__main__':
     M = int(delete_space(M_str), 16)
     print('Plaintext M =', add_space(format(M, 'x')))
     Mx, My = ECC.data_embedding(M)
+    print('Mx =', add_space(format(Mx, 'x')))
+    print('My =', add_space(format(My, 'x')))
     P = point.Point(Mx, My)
-    P.show()
+    
     G = point.Point(ECC.Gx, ECC.Gy)
-    G = G.scalar_mul(ECC.n)
+    A = point.Point(ECC.a, ECC.b)
+    G = G.add(A)
+    G.show()

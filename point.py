@@ -15,18 +15,18 @@ class Point:
     # point addition
     def add(self, input):
         output = Point(0, 0)
-        lamb = ((input.y - self.y) // (input.x - self.x)) % ECC.p
+        lamb = (((input.y - self.y) % ECC.p) // ((input.x - self.x) % ECC.p)) % ECC.p
         output.x = (lamb ** 2 - self.x - input.x) % ECC.p
-        output.y = (-self.y + lamb * (self.x - output.x)) % ECC.p
+        output.y = (ECC.p - self.y + lamb * ((self.x - output.x) % ECC.p)) % ECC.p
 
         return output
 
     # point doubling
     def doubling(self):
         output = Point(0, 0)
-        lamb = ((3 * (self.x ** 2) + ECC.a) // (2 * self.y)) % ECC.p
+        lamb = (((3 * (self.x ** 2) + ECC.a) % ECC.p) // ((2 * self.y) % ECC.p)) % ECC.p
         output.x = (lamb ** 2 - 2 * self.x) % ECC.p
-        output.y = (-self.y + lamb * (self.x - output.x)) % ECC.p
+        output.y = (ECC.p - self.y + lamb * ((self.x - output.x) % ECC.p)) % ECC.p
 
         return output
 
@@ -42,5 +42,5 @@ class Point:
         return D
 
     def show(self):
-        print('Mx =', format(self.x, 'x'))
-        print('My =', format(self.y, 'x'))
+        print(format(self.x, 'x'))
+        print(format(self.y, 'x'))

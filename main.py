@@ -36,8 +36,9 @@ if __name__ == '__main__':
     G = point.Point(ECC.Gx, ECC.Gy)
     Pk = G.scalar_mul(nk)
     # select even or odd
-    selector = Pa_x // 0x10000000000000000000000000000000000000000    # Pa = 2 or 3
-    Pa_x = Pa_x % 0x10000000000000000000000000000000000000000
+    mask = 0x10000000000000000000000000000000000000000
+    selector = Pa_x // mask    # Pa = 2 or 3
+    Pa_x = Pa_x % mask
 
     # find the whole Pa
     value = (Pa_x ** 3 + ECC.a * Pa_x + ECC.b) % ECC.p
@@ -61,10 +62,10 @@ if __name__ == '__main__':
     Pk = int(delete_space(input('Pk = ')), 16)
     Pb = int(delete_space(input('Pb = ')), 16)
     na = int(delete_space(input('na = ')), 16)
-    selector_Pk = Pk // 0x10000000000000000000000000000000000000000  # Pa = 2 or 3
-    selector_Pb = Pb // 0x10000000000000000000000000000000000000000  # Pa = 2 or 3
-    Pk_x = Pk % 0x10000000000000000000000000000000000000000
-    Pb_x = Pb % 0x10000000000000000000000000000000000000000
+    selector_Pk = Pk // mask  # Pa = 2 or 3
+    selector_Pb = Pb // mask  # Pa = 2 or 3
+    Pk_x = Pk % mask
+    Pb_x = Pb % mask
 
     # choose Pk_y
     value = (Pk_x ** 3 + ECC.a * Pk_x + ECC.b) % ECC.p
